@@ -6,7 +6,9 @@ let touchendPoint;
 let contentFlow = [
     {id: 0, text: 'Here is a sample question. Have you experienced ... before?', children: [{answer: 0, id: 1}, {answer: 1, id: 2}]},
     {id: 1, text: 'You haven\t? Here are some resources: ...', children: []},
-    {id: 2, text: 'Share your story. Here\'s what you can do', children: []},
+    {id: 2, text: 'Share your story. Here\'s what you can do', children: [{answer: 0, id: 3}, {answer: 1, id: 4}]},
+    {id: 3, text: 'I do not feel comfortable sharing', children: []},
+    {id: 4, text: 'What do you want to tell us?', children: []},
 ];
 
 document.querySelector('#question').innerHTML = contentFlow[state]['text'];
