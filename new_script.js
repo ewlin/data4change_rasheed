@@ -65,19 +65,32 @@ function loadInitial() {
 loadInitial();
 
 
-function update() {
+//New function to generate slides
+function generateSlides() {
+    //Generate all slides 
+}
+
+
+//New version- update only controls sliding (shifting slides)
+function update(slideFlag) {
     //state.q_id = state.q_id || 0;
     //state.q_progress = state.q_progress || 0;
     console.log(state.q_id, state.q_progress)
     currentQContent = [contentFlow[state.q_id], dataVizPage[state.q_id], ...sharedContent]
 
-    document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
-
+    if (slideFlag) {
+        document.querySelector('#question').setAttribute('class', 'slideLeft');
+        setTimeout(function() {
+            document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
+        }, 2000);
+    } else {
+        document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
+    }
 }
 
 //update();
 
-/**
+
 document.querySelector('#container').addEventListener('touchstart', function(e) {
     if (state.q_id != null) {
         touchstartPoint = null;
@@ -102,12 +115,12 @@ document.querySelector('#container').addEventListener('touchend', function(e) {
         }
         console.log(state);
 
-        update();
+        update('left');
     }
 
 });
 
-**/
+
 
 
 document.querySelector('#back').addEventListener('click', function(e) {
@@ -126,7 +139,7 @@ document.querySelector('#next').addEventListener('click', function(e) {
     console.log(state);
     gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
 
-    update();
+    update('left');
 });
 
 
