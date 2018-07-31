@@ -52,7 +52,7 @@ function loadInitial() {
                 document.querySelector('nav').style = 'display: block';
 
                 console.log(state);
-                gtag('event', `question-${e.id}`, {'event_category': 'first screen'})
+                gtag('event', 'first screen', {'event_category': `question-${e.id}`})
                 //loadNavigation
             });
             document.querySelector('#question-container ul').appendChild(containerListItem);
@@ -124,7 +124,7 @@ document.querySelector('#next').addEventListener('click', function(e) {
         state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
     }
     console.log(state);
-    gtag('event', `question-${state.q_id}`, `screen-number-${state.q_progress}`);
+    gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
 
     update();
 });
