@@ -52,6 +52,7 @@ function loadInitial() {
                 document.querySelector('nav').style = 'display: block';
 
                 console.log(state);
+                gtag('event', `question-${e.id}`, 'first screen')
                 //loadNavigation
             });
             document.querySelector('#question-container ul').appendChild(containerListItem);
@@ -123,6 +124,7 @@ document.querySelector('#next').addEventListener('click', function(e) {
         state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
     }
     console.log(state);
+    gtag('event', `question-${state.q_id}`, `screen-number-${state.q_progress}`); 
 
     update();
 });
