@@ -35,27 +35,39 @@ const sharedContent = [
 
 
 function loadInitial() {
-    document.getElementById('question-container').appendChild(document.createElement('ul'));
+    if (!document.querySelector('ul')) {
+        document.getElementById('question-container').appendChild(document.createElement('ul'));
 
-    contentFlow.forEach((e,i) => {
-        //document.getElementByID('question-container').
-        let containerListItem = document.createElement('li');
-        containerListItem.innerHTML = e.slide_text;
-        containerListItem.addEventListener('click', () => {
-            state.q_id = e.id;
-            document.getElementById('question-container').removeChild(document.querySelector('ul'));
-            update();
+        contentFlow.forEach((e,i) => {
+
+            //document.getElementByID('question-container').
+            let containerListItem = document.createElement('li');
+            containerListItem.innerHTML = e.slide_text;
+            //bind id with google analytics to track question #
+            containerListItem.addEventListener('click', () => {
+                state.q_id = e.id;
+                state.q_progress = 0;
+                document.getElementById('question-container').removeChild(document.querySelector('ul'));
+                update();
+                document.querySelector('nav').style = 'display: block';
+
+                console.log(state);
+                gtag('event', `question-${e.id}`, 'first screen')
+                //loadNavigation
+            });
+            document.querySelector('#question-container ul').appendChild(containerListItem);
         });
-        document.querySelector('#question-container ul').appendChild(containerListItem);
-    });
+    }
+
 
 }
 
 loadInitial();
 
+
 function update() {
-    state.q_id = state.q_id || 0;
-    state.q_progress = state.q_progress || 0;
+    //state.q_id = state.q_id || 0;
+    //state.q_progress = state.q_progress || 0;
     console.log(state.q_id, state.q_progress)
     currentQContent = [contentFlow[state.q_id], dataVizPage[state.q_id], ...sharedContent]
 
@@ -65,9 +77,9 @@ function update() {
 
 //update();
 
-
-document.querySelector('body').addEventListener('touchstart', function(e) {
-    if (state.q_id) {
+/**
+document.querySelector('#container').addEventListener('touchstart', function(e) {
+    if (state.q_id != null) {
         touchstartPoint = null;
         touchendPoint = null;
         console.log('test');
@@ -77,8 +89,8 @@ document.querySelector('body').addEventListener('touchstart', function(e) {
 });
 
 
-document.querySelector('body').addEventListener('touchend', function(e) {
-    if (state.q_id) {
+document.querySelector('#container').addEventListener('touchend', function(e) {
+    if (state.q_id != null) {
         console.log('test');
         console.log(e.changedTouches[0]['clientX']);
         touchendPoint = e.changedTouches[0]['clientX'];
@@ -88,11 +100,35 @@ document.querySelector('body').addEventListener('touchend', function(e) {
         } else {
             state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
         }
+        console.log(state);
 
         update();
     }
 
 });
+
+**/
+
+
+document.querySelector('#back').addEventListener('click', function(e) {
+    if (state.q_id != null) {
+        state.q_progress > 0 ? state.q_progress-- : 0;
+    }
+    console.log(state);
+
+    update();
+});
+
+document.querySelector('#next').addEventListener('click', function(e) {
+    if (state.q_id != null) {
+        state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+    }
+    console.log(state);
+    gtag('event', `question-${state.q_id}`, `screen-number-${state.q_progress}`); 
+
+    update();
+});
+
 
 function reset() {
     document.querySelector('#question').innerHTML = '';
@@ -100,9 +136,10 @@ function reset() {
         q_id: null,
         q_progress: null,
     };
+    document.querySelector('nav').style = 'display: none';
 }
 
-document.querySelector('button').addEventListener('click', function() {
+document.querySelector('#home').addEventListener('click', function() {
     reset();
     loadInitial();
 });
