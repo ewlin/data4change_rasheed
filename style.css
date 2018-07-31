@@ -22,8 +22,42 @@ body, html {
     /*transform: translate(-500px,0);*/
 }
 
+
+
 .slideLeft {
     transform: translate(-120%,0);
+    transition-property: transform;
+    transition-duration: 1.5s;
+}
+
+nav {
+    height: 10%;
+    position: fixed;
+    bottom: 0;
+}
+
+.slide {
+    height: 100%;
+    background-color: red;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.center {
+    transform: translate(0,0);
+    transition-property: transform;
+    transition-duration: 1.5s;
+}
+
+.right {
+    transform: translate(100%,0);
+    transition-property: transform;
+    transition-duration: 1.5s;
+}
+
+.left {
+    transform: translate(-100%,0);
     transition-property: transform;
     transition-duration: 1.5s;
 }

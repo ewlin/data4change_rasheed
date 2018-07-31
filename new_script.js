@@ -36,7 +36,7 @@ const sharedContent = [
 
 function loadInitial() {
     if (!document.querySelector('ul')) {
-        document.getElementById('question-container').appendChild(document.createElement('ul'));
+        document.getElementById('container').appendChild(document.createElement('ul'));
 
         contentFlow.forEach((e,i) => {
 
@@ -47,15 +47,16 @@ function loadInitial() {
             containerListItem.addEventListener('click', () => {
                 state.q_id = e.id;
                 state.q_progress = 0;
-                document.getElementById('question-container').removeChild(document.querySelector('ul'));
-                update();
+                document.getElementById('container').removeChild(document.querySelector('ul'));
+                //update();
+                generateSlides();
                 document.querySelector('nav').style = 'display: block';
 
                 console.log(state);
                 gtag('event', 'first screen', {'event_category': `question-${e.id}`})
                 //loadNavigation
             });
-            document.querySelector('#question-container ul').appendChild(containerListItem);
+            document.querySelector('#container ul').appendChild(containerListItem);
         });
     }
 
@@ -67,7 +68,25 @@ loadInitial();
 
 //New function to generate slides
 function generateSlides() {
-    //Generate all slides 
+    const parentEle = document.querySelector('#container');
+    currentQContent = [contentFlow[state.q_id], dataVizPage[state.q_id], ...sharedContent]
+
+    currentQContent.forEach((slide, i) => {
+        const slideElement = document.createElement('div');
+        //element position absolute
+        slideElement.style.zIndex = `-${i}`;
+        slideElement.style.position = 'absolute';
+        slideElement.classList.add('slide');
+        slideElement.setAttribute('id', `slide${state.q_id}-${i}`)
+        if (i == 0) {
+            slideElement.classList.add('center');
+        } else {
+            slideElement.classList.add('right');
+        }
+        slideElement.innerHTML = `${currentQContent[i].slide_text}`;
+        parentEle.appendChild(slideElement);
+    });
+
 }
 
 
@@ -77,7 +96,7 @@ function update(slideFlag) {
     //state.q_progress = state.q_progress || 0;
     console.log(state.q_id, state.q_progress)
     currentQContent = [contentFlow[state.q_id], dataVizPage[state.q_id], ...sharedContent]
-
+    /**
     if (slideFlag) {
         document.querySelector('#question').setAttribute('class', 'slideLeft');
         setTimeout(function() {
@@ -86,9 +105,13 @@ function update(slideFlag) {
     } else {
         document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
     }
+    **/
+    document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
+
 }
 
 //update();
+
 
 
 document.querySelector('#container').addEventListener('touchstart', function(e) {
@@ -110,26 +133,49 @@ document.querySelector('#container').addEventListener('touchend', function(e) {
 
         if (touchendPoint < touchstartPoint) {
             state.q_progress > 0 ? state.q_progress-- : 0;
+            shiftSlides('next');
         } else {
             state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+            shiftSlides('back');
         }
         console.log(state);
 
-        update('left');
+        //update('left');
     }
 
 });
 
 
+function shiftSlides(direction) {
+    if (direction == 'back') {
+        let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress + 1}`);
+        let prevSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress}`);
 
+        currentSlide.classList.remove('center');
+        currentSlide.classList.add('right');
+
+        prevSlide.classList.remove('left');
+        prevSlide.classList.add('center');
+    } else if (direction == 'next') {
+        let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress - 1}`);
+        let nextSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress}`);
+
+        currentSlide.classList.remove('center');
+        currentSlide.classList.add('left');
+
+        nextSlide.classList.remove('right');
+        nextSlide.classList.add('center');
+    }
+
+}
 
 document.querySelector('#back').addEventListener('click', function(e) {
     if (state.q_id != null) {
         state.q_progress > 0 ? state.q_progress-- : 0;
     }
     console.log(state);
+    shiftSlides('back');
 
-    update();
 });
 
 document.querySelector('#next').addEventListener('click', function(e) {
@@ -138,8 +184,9 @@ document.querySelector('#next').addEventListener('click', function(e) {
     }
     console.log(state);
     gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
+    shiftSlides('next');
 
-    update('left');
+
 });
 
 
