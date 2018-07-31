@@ -135,7 +135,7 @@ function shiftSlides(direction) {
 
 }
 
-document.querySelector('html').addEventListener('touchstart', function(e) {
+document.querySelector('#container').addEventListener('touchstart', function(e) {
     if (state.q_id != null) {
         touchstartPoint = null;
         touchendPoint = null;
@@ -146,7 +146,7 @@ document.querySelector('html').addEventListener('touchstart', function(e) {
 });
 
 
-document.querySelector('html').addEventListener('touchend', function(e) {
+document.querySelector('#container').addEventListener('touchend', function(e) {
     if (state.q_id != null) {
         console.log('test');
         console.log(e.changedTouches[0]['clientX']);
