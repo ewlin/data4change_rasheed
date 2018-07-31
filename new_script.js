@@ -112,40 +112,6 @@ function update(slideFlag) {
 
 //update();
 
-
-
-document.querySelector('#container').addEventListener('touchstart', function(e) {
-    if (state.q_id != null) {
-        touchstartPoint = null;
-        touchendPoint = null;
-        console.log('test');
-        console.log(e.changedTouches[0]['clientX']);
-        touchstartPoint = e.changedTouches[0]['clientX'];
-    }
-});
-
-
-document.querySelector('#container').addEventListener('touchend', function(e) {
-    if (state.q_id != null) {
-        console.log('test');
-        console.log(e.changedTouches[0]['clientX']);
-        touchendPoint = e.changedTouches[0]['clientX'];
-
-        if (touchendPoint < touchstartPoint) {
-            state.q_progress > 0 ? state.q_progress-- : 0;
-            shiftSlides('next');
-        } else {
-            state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
-            shiftSlides('back');
-        }
-        console.log(state);
-
-        //update('left');
-    }
-
-});
-
-
 function shiftSlides(direction) {
     if (direction == 'back') {
         let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress + 1}`);
@@ -169,6 +135,38 @@ function shiftSlides(direction) {
 
 }
 
+document.querySelector('html').addEventListener('touchstart', function(e) {
+    if (state.q_id != null) {
+        touchstartPoint = null;
+        touchendPoint = null;
+        console.log('test');
+        console.log(e.changedTouches[0]['clientX']);
+        touchstartPoint = e.changedTouches[0]['clientX'];
+    }
+});
+
+
+document.querySelector('html').addEventListener('touchend', function(e) {
+    if (state.q_id != null) {
+        console.log('test');
+        console.log(e.changedTouches[0]['clientX']);
+        touchendPoint = e.changedTouches[0]['clientX'];
+
+        if (touchendPoint > touchstartPoint) {
+            state.q_progress > 0 ? state.q_progress-- : 0;
+            shiftSlides('back');
+        } else {
+            state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+            shiftSlides('next');
+        }
+        console.log(state);
+
+        //update('left');
+    }
+
+});
+
+
 document.querySelector('#back').addEventListener('click', function(e) {
     if (state.q_id != null) {
         state.q_progress > 0 ? state.q_progress-- : 0;
@@ -188,6 +186,7 @@ document.querySelector('#next').addEventListener('click', function(e) {
 
 
 });
+
 
 
 function reset() {
