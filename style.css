@@ -13,12 +13,17 @@ body, html {
 
 }
 
-
-
 .container {
     text-align: center;
     width: 80%;
     height: 100%;
     margin: auto;
     font-family: 'Amiri';
+}
+
+nav {
+    position: fixed;
+    height: 10%;
+    bottom: 0;
+    border: 1px solid red; 
 }

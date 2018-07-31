@@ -96,11 +96,15 @@ document.querySelector('body').addEventListener('touchend', function(e) {
 
 function reset() {
     document.querySelector('#question').innerHTML = '';
+    state = {
+        q_id: null,
+        q_progress: null,
+    };
 }
 
 document.querySelector('button').addEventListener('click', function() {
     reset();
-    loadInitial(); 
+    loadInitial();
 });
 
 
