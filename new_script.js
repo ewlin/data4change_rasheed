@@ -1,3 +1,18 @@
+const xmlhttp = new XMLHttpRequest();
+const data = "data/data.json";
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        const myArr = JSON.parse(this.responseText);
+        console.log(myArr);
+        //myFunction(myArr);
+    }
+};
+xmlhttp.open("GET", data, true);
+xmlhttp.send();
+
+
+
 let state = {
     q_id: null,
     q_progress: null,
