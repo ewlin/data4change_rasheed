@@ -10,17 +10,24 @@ function writeJson(file, data) {
   fs.writeFileSync(file, jsonData);
 }
 
-function createRowObject(data, columns) {
-  return columns.reduce((acc, col) => {
+function createRowObject(data, columns, name, index) {
+  const obj = columns.reduce((acc, col) => {
     acc[col] = data[col];
     return acc;
   }, {});
+
+  //  add id, if an array object
+  if (name) {
+    obj.id = `${name}-${index}`;
+  }
+
+  return obj;
 }
 
 /*
   Fetch sheet data and format it
  */
-function getSheetData(sheet, type, columns) {
+function getSheetData(sheet, name, type, columns) {
   return new Promise((resolve, reject) => {
     sheet.getRows({ offset: 1 }, function(err, rows) {
       if (err) {
@@ -29,8 +36,8 @@ function getSheetData(sheet, type, columns) {
 
       let data = {};
       if (type === 'array') {
-        data = rows.map((row) => {
-          return createRowObject(row, columns);
+        data = rows.map((row, i) => {
+          return createRowObject(row, columns, name, i);
         });
       } else if (type === 'object') {
         if (rows.length) {
@@ -66,21 +73,17 @@ async function updateData() {
 
   //  create all promises to fetch data from all the sheets
   const promises = SHEETS.map((SHEET) => {
-    const { index, type, cols } = SHEET;
-    return getSheetData(sheetData.worksheets[index], type, cols);
+    const { index, name, type, cols } = SHEET;
+    return getSheetData(sheetData.worksheets[index], name, type, cols);
   });
 
   Promise.all(promises)
     .then((data) => {
       //  map data to final format
-      console.log('reduce');
       const formattedData = SHEETS.reduce((acc, SHEET, i) => {
         acc[SHEET.name] = data[i];
         return acc;
       }, {});
-
-      console.log('formattedData');
-      console.log(formattedData);
 
       return Promise.resolve(formattedData);
     })
