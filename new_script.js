@@ -52,11 +52,22 @@ function loadInitial() {
                 state.q_id = e.id;
                 state.q_progress = 0;
                 document.getElementById('container').removeChild(document.querySelector('ul'));
+                document.getElementById('container').removeChild(document.querySelector('#centerCircle'));
+
                 //update();
                 generateSlides();
-                document.querySelector('nav').style = 'display: block';
-                document.querySelector('#home-container').style = 'display: block';
 
+
+                //generate navigation buttons
+
+                let nav = document.createElement('nav');
+                nav.innerHTML = `<span id='home'>HOME</span> | <span>TEST</span>`;
+                document.getElementById('container').appendChild(nav);
+
+                document.querySelector('#home').addEventListener('click', function() {
+                    reset();
+                    loadInitial();
+                });
 
                 console.log(state);
                 gtag('event', 'first screen', {'event_category': `question-${e.id}`})
@@ -64,6 +75,12 @@ function loadInitial() {
             });
             document.querySelector('#container ul').appendChild(containerListItem);
         });
+
+        //circle text
+        const circleText = document.createElement('div');
+        circleText.setAttribute('id', 'centerCircle');
+        circleText.innerHTML = "<div><p>Have you experienced corruption?</p><p class='small_blue'>Select one</p></div>"
+        document.querySelector('#container').appendChild(circleText);
     }
 
 
@@ -196,20 +213,16 @@ document.querySelector('#next').addEventListener('click', function(e) {
 
 
 function reset() {
-    document.querySelector('#container').innerHTML = '';
+    document.querySelector('#container').querySelectorAll('.slide').forEach(slide => document.querySelector('#container').removeChild(slide));
+    document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('nav'));
     state = {
         q_id: null,
         q_progress: null,
     };
-    document.querySelector('nav').style = 'display: none';
-    document.querySelector('#home-container').style = 'display: none';
 
 }
 
-document.querySelector('#home').addEventListener('click', function() {
-    reset();
-    loadInitial();
-});
+
 
 
 //Swipe distance calculation (basic trig for hypot...)
