@@ -83,12 +83,21 @@ div#centerCircle {
     background: #dde5ea;
 }
 
+div#centerCircle div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
 div#centerCircle p {
-    padding-top: 10vw;
-    max-width: 25vw;
+    /**padding-top: 10vw;**/
+    /**max-width: 25vw;**/
+    position: relative;;
     margin: auto;
     font-size: 1.2em;
-
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 div#centerCircle p.small_blue {

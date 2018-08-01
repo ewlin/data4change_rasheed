@@ -79,7 +79,7 @@ function loadInitial() {
         //circle text
         const circleText = document.createElement('div');
         circleText.setAttribute('id', 'centerCircle');
-        circleText.innerHTML = "<p>Have you experienced corruption?</p><p class='small_blue'>Select one</p>"
+        circleText.innerHTML = "<div><p>Have you experienced corruption?</p><p class='small_blue'>Select one</p></div>"
         document.querySelector('#container').appendChild(circleText);
     }
 
