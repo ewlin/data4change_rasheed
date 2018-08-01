@@ -52,6 +52,8 @@ function loadInitial() {
                 state.q_id = e.id;
                 state.q_progress = 0;
                 document.getElementById('container').removeChild(document.querySelector('ul'));
+                document.getElementById('container').removeChild(document.querySelector('#centerCircle'));
+
                 //update();
                 generateSlides();
 
