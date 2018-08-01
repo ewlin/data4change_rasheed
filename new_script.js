@@ -16,9 +16,10 @@ const contentFlow = [
     {id: 3, text: 'I do not feel comfortable sharing', children: []},
     {id: 4, text: 'What do you want to tell us?', children: []},
     **/
-    {id: 0, slide_text: "Question 1 Text. Have you been...?", image: "image1.png"},
-    {id: 1, slide_text: "Question 2 Text. Have you been...?", image: "imageA.png"},
-    {id: 2, slide_text: "Question 3 Text. Have you been...?", image: "imageB.png"},
+    {id: 0, slide_text: "Have you had to bribe someone for a service?", image: "assets/bribe.svg"},
+    {id: 1, slide_text: "Has anyone paid you to vote for them?", image: "assets/election.svg"},
+    {id: 2, slide_text: "Have you had to resort to wasta?", image: "assets/wasta.svg"},
+    {id: 3, slide_text: "Other", input: true, input_type: 'textbox'}
 ];
 
 const dataVizPage = [
@@ -42,7 +43,10 @@ function loadInitial() {
 
             //document.getElementByID('question-container').
             let containerListItem = document.createElement('li');
-            containerListItem.innerHTML = e.slide_text;
+            containerListItem.innerHTML =
+                e.image
+                    ? `<div class='q-wrapper'><img class='q-img' src=${e.image} /><p>${e.slide_text}</p></div>`
+                    : `<div class='q-wrapper'><div class='q-img'></div><p>${e.slide_text}</p></div>`;
             //bind id with google analytics to track question #
             containerListItem.addEventListener('click', () => {
                 state.q_id = e.id;
@@ -51,6 +55,8 @@ function loadInitial() {
                 //update();
                 generateSlides();
                 document.querySelector('nav').style = 'display: block';
+                document.querySelector('#home-container').style = 'display: block';
+
 
                 console.log(state);
                 gtag('event', 'first screen', {'event_category': `question-${e.id}`})
@@ -69,7 +75,7 @@ loadInitial();
 //New function to generate slides
 function generateSlides() {
     const parentEle = document.querySelector('#container');
-    currentQContent = [contentFlow[state.q_id], dataVizPage[state.q_id], ...sharedContent]
+    currentQContent = [dataVizPage[state.q_id], ...sharedContent]
 
     currentQContent.forEach((slide, i) => {
         const slideElement = document.createElement('div');
@@ -190,7 +196,7 @@ document.querySelector('#next').addEventListener('click', function(e) {
 
 
 function reset() {
-    document.querySelector('#question').innerHTML = '';
+    document.querySelector('#container').innerHTML = '';
     state = {
         q_id: null,
         q_progress: null,
