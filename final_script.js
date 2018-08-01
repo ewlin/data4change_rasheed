@@ -77,7 +77,7 @@ function onDataLoad(data) {
           //generate navigation buttons
 
           let nav = document.createElement('nav');
-          nav.innerHTML = `<span id='home'>HOME</span> | <span>TEST</span>`;
+          nav.innerHTML = `<span id='home'>Home</span>`;
           document.getElementById('container').appendChild(nav);
 
           document.querySelector('#home').addEventListener('click', function() {
@@ -115,7 +115,7 @@ function onDataLoad(data) {
     currentQContent.forEach((slide, i) => {
       const slideElement = document.createElement('div');
       //element position absolute
-      slideElement.style.zIndex = `-${i}`;
+      //slideElement.style.zIndex = `-${i}`;
       slideElement.style.position = 'absolute';
       slideElement.classList.add('slide');
       slideElement.setAttribute('id', `slide${state.q_id}-${i}`)
@@ -126,7 +126,37 @@ function onDataLoad(data) {
       }
       
       
-      slideElement.innerHTML = slide.title ? `${slide.title}` : (slide.question ? `${slide.question}` : 'PLACEHOLDER')
+      //slideElement.innerHTML = slide.title ? `${slide.title}` : (slide.question ? `${slide.question}` : 'PLACEHOLDER'); 
+      if (slide.type == 'about') {
+        slideElement.innerHTML = `<div class='about-container'><header><h1>${slide.title}</h1><p>${slide.text}</p></header><h2>Join the Movement</h2><button>Tell Us Your Story</button></div>`
+
+      } else if (slide.question) {
+        let template = `<h1>${slide.question}</h1>`; 
+        let input; 
+        
+        if (slide.type == 'select') {
+          input = `<select><option>Select</option><option>Yes</option><option>NO</option></select>`; 
+
+        } else if (slide.type == 'datepicker') {
+            input = `<input type="date" value="YYYY-MM-DD" />`
+
+        } else {
+            input = `<input placeholder='ENTER YOUR RESPONSE'/>`
+
+        }
+        //switch (slide.type) {
+        //  case 'select': 
+        //    input = `<select></select>`; 
+        //  case 'datepicker': 
+        //    input = `<input type="date" value="YYYY-MM-DD"/>`
+        //  default: 
+        //    input = '<input />'
+        //}
+        slideElement.innerHTML = `<div class='question-container'>${template}${input}</div>`; 
+      } else {
+        slideElement.innerHTML = `<div><h1>${slide.title}</h1><p>${slide.text}</p></div>`
+      }
+      
       parentEle.appendChild(slideElement);
     });
 
@@ -213,25 +243,25 @@ function onDataLoad(data) {
   });
 
 
-  document.querySelector('#back').addEventListener('click', function(e) {
-    if (state.q_id != null) {
-      state.q_progress > 0 ? state.q_progress-- : 0;
-    }
-    console.log(state);
-    shiftSlides('back');
-
-  });
-
-  document.querySelector('#next').addEventListener('click', function(e) {
-    if (state.q_id != null) {
-      state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
-    }
-    console.log(state);
-    gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
-    shiftSlides('next');
-
-
-  });
+  //document.querySelector('#back').addEventListener('click', function(e) {
+  //  if (state.q_id != null) {
+  //    state.q_progress > 0 ? state.q_progress-- : 0;
+  //  }
+  //  console.log(state);
+  //  shiftSlides('back');
+//
+  //});
+//
+  //document.querySelector('#next').addEventListener('click', function(e) {
+  //  if (state.q_id != null) {
+  //    state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+  //  }
+  //  console.log(state);
+  //  gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
+  //  shiftSlides('next');
+//
+//
+  //});
 
 
 

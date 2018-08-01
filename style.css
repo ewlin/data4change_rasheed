@@ -115,18 +115,49 @@ div#centerCircle p.small_blue {
 }
 
 nav {
-    height: 10%;
-    position: absolute;
-    top: 30;
+  height: 10%;
+  position: absolute;
+  top: 0; 
+  padding-top: 25px;
+  padding-left: 20px;
+  color: #75BBC8;
+    
+}
+
+nav #home {
+  font-weight: 300;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #75BBC8;
+
 }
 
 .bottom {
-    top: 200; 
+  top: 200; 
+}
+
+.slide h1 {
+  font-weight: 300; 
+  font-size: 1.4em;
+  
+}
+
+.slide div {
+  top: 50%;
+  position: relative;
+  width: 65%; 
+  margin: auto;
+  transform: translateY(-50%);
+}
+
+input, select {
+  border: 1px solid grey; 
+  width: 65%; 
+  border-radius: 2px;
+  padding: 11px 5px;
 }
 
 .slide {
     height: 100%;
-    background-color: red;
     width: 100%;
     top: 0;
     left: 0;
@@ -152,3 +183,4 @@ nav {
     transition-duration: 1.2s;
     transition-timing-function: easeInOutQuad;
 }
+
