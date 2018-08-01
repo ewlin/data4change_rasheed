@@ -1,1 +1,85 @@
-{"quizz":{"title":"Have you experienced corruption?"},"questions":[{"text":"Have you had to \rbribe someone for \ra service?","icon":"bribary","color":"#ff000","type":"question","placeholder":""},{"text":"Have you ever been nudged to to vote for somebody?","icon":"voting","color":"#00ff00","type":"question","placeholder":""},{"text":"Have you experienced wasta?","icon":"waste","color":"#0000ff","type":"question","placeholder":""},{"text":"Any other incident you can think of?","icon":"","color":"#0f00ff","type":"custom","placeholder":"Give an example"}],"data-vizes":[{"title":"Data viz title 1","text":"Data viz text 1","image":"Data viz graphics 1"}],"about":{"title":"Hi, we’re Rasheed","text":"Rasheed is a civil society oragnization that fights corruption in the public and private sector in Jordan.","subtitle":"Join the Movement","image":""},"form":[{"question":"Where did this incident take place?","type":"select","data":"<list of governents>"},{"question":"Why did it happen?","type":"textarea","data":""},{"question":"Do you remember the date and time?","type":"datepicker","data":""},{"question":"Do you have evidence?","type":"radiogroup","data":"yes, no"},{"question":"Can you name the institution?","type":"input","data":""},{"question":"Would you like to tell us more details about the incident?","type":"textarea","data":""},{"question":"Would you like to give us more information about yourself?","type":"contact","data":""}]}
+{
+    "quizz": {
+        "title": "Have you experienced corruption?"
+    },
+    "questions": [
+        {
+            "text": "Have you had to \rbribe someone for \ra service?",
+            "icon": "bribary",
+            "color": "#ff000",
+            "type": "question",
+            "placeholder": ""
+        },
+        {
+            "text": "Have you ever been nudged to to vote for somebody?",
+            "icon": "voting",
+            "color": "#00ff00",
+            "type": "question",
+            "placeholder": ""
+        },
+        {
+            "text": "Have you experienced wasta?",
+            "icon": "waste",
+            "color": "#0000ff",
+            "type": "question",
+            "placeholder": ""
+        },
+        {
+            "text": "Any other incident you can think of?",
+            "icon": "",
+            "color": "#0f00ff",
+            "type": "custom",
+            "placeholder": "Give an example"
+        }
+    ],
+    "data-vizes": [
+        {
+            "title": "Data viz title 1",
+            "text": "Data viz text 1",
+            "image": "Data viz graphics 1"
+        }
+    ],
+    "about": {
+        "title": "Hi, we’re Rasheed",
+        "text": "Rasheed is a civil society oragnization that fights corruption in the public and private sector in Jordan.",
+        "subtitle": "Join the Movement",
+        "image": ""
+    },
+    "form": [
+        {
+            "question": "Where did this incident take place?",
+            "type": "select",
+            "data": "<list of governents>"
+        },
+        {
+            "question": "Why did it happen?",
+            "type": "textarea",
+            "data": ""
+        },
+        {
+            "question": "Do you remember the date and time?",
+            "type": "datepicker",
+            "data": ""
+        },
+        {
+            "question": "Do you have evidence?",
+            "type": "radiogroup",
+            "data": "yes, no"
+        },
+        {
+            "question": "Can you name the institution?",
+            "type": "input",
+            "data": ""
+        },
+        {
+            "question": "Would you like to tell us more details about the incident?",
+            "type": "textarea",
+            "data": ""
+        },
+        {
+            "question": "Would you like to give us more information about yourself?",
+            "type": "contact",
+            "data": ""
+        }
+    ]
+}
