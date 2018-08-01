@@ -16,9 +16,10 @@ const contentFlow = [
     {id: 3, text: 'I do not feel comfortable sharing', children: []},
     {id: 4, text: 'What do you want to tell us?', children: []},
     **/
-    {id: 0, slide_text: "Question 1 Text. Have you been...?", image: "image1.png"},
-    {id: 1, slide_text: "Question 2 Text. Have you been...?", image: "imageA.png"},
-    {id: 2, slide_text: "Question 3 Text. Have you been...?", image: "imageB.png"},
+    {id: 0, slide_text: "Have you had to bribe someone for a service?", image: "assets/bribe.svg"},
+    {id: 1, slide_text: "Has anyone paid you to vote for them?", image: "assets/election.svg"},
+    {id: 2, slide_text: "Have you had to resort to wasta?", image: "assets/wasta.svg"},
+    {id: 3, slide_text: "Other", input: true, input_type: 'textbox'}
 ];
 
 const dataVizPage = [
@@ -36,26 +37,32 @@ const sharedContent = [
 
 function loadInitial() {
     if (!document.querySelector('ul')) {
-        document.getElementById('question-container').appendChild(document.createElement('ul'));
+        document.getElementById('container').appendChild(document.createElement('ul'));
 
         contentFlow.forEach((e,i) => {
 
             //document.getElementByID('question-container').
             let containerListItem = document.createElement('li');
-            containerListItem.innerHTML = e.slide_text;
+            containerListItem.innerHTML =
+                e.image
+                    ? `<div class='q-wrapper'><img class='q-img' src=${e.image} /><p>${e.slide_text}</p></div>`
+                    : `<div class='q-wrapper'><div class='q-img'></div><p>${e.slide_text}</p></div>`;
             //bind id with google analytics to track question #
             containerListItem.addEventListener('click', () => {
                 state.q_id = e.id;
                 state.q_progress = 0;
-                document.getElementById('question-container').removeChild(document.querySelector('ul'));
-                update();
+                document.getElementById('container').removeChild(document.querySelector('ul'));
+                //update();
+                generateSlides();
                 document.querySelector('nav').style = 'display: block';
+                document.querySelector('#home-container').style = 'display: block';
+
 
                 console.log(state);
                 gtag('event', 'first screen', {'event_category': `question-${e.id}`})
                 //loadNavigation
             });
-            document.querySelector('#question-container ul').appendChild(containerListItem);
+            document.querySelector('#container ul').appendChild(containerListItem);
         });
     }
 
@@ -65,19 +72,75 @@ function loadInitial() {
 loadInitial();
 
 
-function update() {
+//New function to generate slides
+function generateSlides() {
+    const parentEle = document.querySelector('#container');
+    currentQContent = [dataVizPage[state.q_id], ...sharedContent]
+
+    currentQContent.forEach((slide, i) => {
+        const slideElement = document.createElement('div');
+        //element position absolute
+        slideElement.style.zIndex = `-${i}`;
+        slideElement.style.position = 'absolute';
+        slideElement.classList.add('slide');
+        slideElement.setAttribute('id', `slide${state.q_id}-${i}`)
+        if (i == 0) {
+            slideElement.classList.add('center');
+        } else {
+            slideElement.classList.add('right');
+        }
+        slideElement.innerHTML = `${currentQContent[i].slide_text}`;
+        parentEle.appendChild(slideElement);
+    });
+
+}
+
+
+//New version- update only controls sliding (shifting slides)
+function update(slideFlag) {
     //state.q_id = state.q_id || 0;
     //state.q_progress = state.q_progress || 0;
     console.log(state.q_id, state.q_progress)
     currentQContent = [contentFlow[state.q_id], dataVizPage[state.q_id], ...sharedContent]
-
+    /**
+    if (slideFlag) {
+        document.querySelector('#question').setAttribute('class', 'slideLeft');
+        setTimeout(function() {
+            document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
+        }, 2000);
+    } else {
+        document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
+    }
+    **/
     document.querySelector('#question').innerHTML = currentQContent[state.q_progress]['slide_text'];
 
 }
 
 //update();
 
-/**
+function shiftSlides(direction) {
+    if (direction == 'back') {
+        let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress + 1}`);
+        let prevSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress}`);
+
+        currentSlide.classList.remove('center');
+        currentSlide.classList.add('right');
+
+        prevSlide.classList.remove('left');
+        prevSlide.classList.add('center');
+    } else if (direction == 'next') {
+        let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress - 1}`);
+        let nextSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress}`);
+
+        currentSlide.classList.remove('center');
+        currentSlide.classList.add('left');
+
+        nextSlide.classList.remove('right');
+        nextSlide.classList.add('center');
+    }
+
+}
+
 document.querySelector('#container').addEventListener('touchstart', function(e) {
     if (state.q_id != null) {
         touchstartPoint = null;
@@ -95,19 +158,19 @@ document.querySelector('#container').addEventListener('touchend', function(e) {
         console.log(e.changedTouches[0]['clientX']);
         touchendPoint = e.changedTouches[0]['clientX'];
 
-        if (touchendPoint < touchstartPoint) {
+        if (touchendPoint > touchstartPoint) {
             state.q_progress > 0 ? state.q_progress-- : 0;
+            shiftSlides('back');
         } else {
             state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+            shiftSlides('next');
         }
         console.log(state);
 
-        update();
+        //update('left');
     }
 
 });
-
-**/
 
 
 document.querySelector('#back').addEventListener('click', function(e) {
@@ -115,8 +178,8 @@ document.querySelector('#back').addEventListener('click', function(e) {
         state.q_progress > 0 ? state.q_progress-- : 0;
     }
     console.log(state);
+    shiftSlides('back');
 
-    update();
 });
 
 document.querySelector('#next').addEventListener('click', function(e) {
@@ -125,18 +188,22 @@ document.querySelector('#next').addEventListener('click', function(e) {
     }
     console.log(state);
     gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
+    shiftSlides('next');
 
-    update();
+
 });
 
 
+
 function reset() {
-    document.querySelector('#question').innerHTML = '';
+    document.querySelector('#container').innerHTML = '';
     state = {
         q_id: null,
         q_progress: null,
     };
     document.querySelector('nav').style = 'display: none';
+    document.querySelector('#home-container').style = 'display: none';
+
 }
 
 document.querySelector('#home').addEventListener('click', function() {

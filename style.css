@@ -1,5 +1,5 @@
 body {
-    background: blue;
+    font-family: 'Source Sans Pro';
 }
 
 body, html {
@@ -13,10 +13,101 @@ body, html {
 
 }
 
+#home-container {
+    position: fixed;
+    display: none;
+    top: 0;
+}
 #container {
     text-align: center;
-    width: 80%;
+    width: 100%;
     height: 100%;
     margin: auto;
-    font-family: 'Amiri';
+    /*transform: translate(-500px,0);*/
+}
+
+#container ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+
+}
+
+#container ul li {
+    width: 50%;
+    text-decoration: none;
+    height: 50%;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid grey;
+
+}
+
+#container ul li .q-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80%;
+    height: 50%;
+}
+
+#container ul li p {
+    top: 50%;
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+#container ul li .q-img {
+    height: 35%;
+    /*bottom: 50%;*/
+}
+
+
+
+
+.slideLeft {
+    transform: translate(-120%,0);
+    transition-property: transform;
+    transition-duration: 1.5s;
+}
+
+nav {
+    height: 10%;
+    position: fixed;
+    bottom: 0;
+}
+
+.slide {
+    height: 100%;
+    background-color: red;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.center {
+    transform: translate(0,0);
+    transition-property: transform;
+    transition-duration: 1.2s;
+    transition-timing-function: easeInOutQuad;
+}
+
+.right {
+    transform: translate(100%,0);
+    transition-property: transform;
+    transition-duration: 1.2s;
+    transition-timing-function: easeInOutQuad;
+}
+
+.left {
+    transform: translate(-100%,0);
+    transition-property: transform;
+    transition-duration: 1.2s;
+    transition-timing-function: easeInOutQuad;
 }
