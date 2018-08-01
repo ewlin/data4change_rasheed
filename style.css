@@ -19,8 +19,9 @@ body, html {
     top: 0;
 }
 #container {
+    margin: auto;
     text-align: center;
-    width: 100%;
+    max-width: 500px;
     height: 100%;
     /*transform: translate(-500px,0);*/
 }
@@ -117,6 +118,10 @@ nav {
     height: 10%;
     position: absolute;
     top: 30;
+}
+
+.bottom {
+    top: 200; 
 }
 
 .slide {
