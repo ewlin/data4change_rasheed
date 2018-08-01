@@ -202,6 +202,8 @@ function reset() {
         q_progress: null,
     };
     document.querySelector('nav').style = 'display: none';
+    document.querySelector('#home-container').style = 'display: none';
+
 }
 
 document.querySelector('#home').addEventListener('click', function() {
