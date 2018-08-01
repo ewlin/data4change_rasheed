@@ -38,18 +38,6 @@ function onDataLoad(data) {
     {id: 3, slide_text: "Other", input: true, input_type: 'textbox'}
   ];
 
-  const dataVizPage = [
-    {id: 0, slide_text: "Data Viz 1", image: "data_image1.svg"},
-    {id: 1, slide_text: "Data Viz 2", image: "data_image2.svg"},
-    {id: 2, slide_text: "Data Viz 3", image: "data_image3.svg"},
-  ];
-
-  const sharedContent = [
-    {slide_text: 'Rasheed content'},
-    {slide_text: 'More content'},
-    {slide_text: 'Here goes a form'},
-  ];
-
 
   function loadInitial() {
     if (!document.querySelector('ul')) {
@@ -76,14 +64,23 @@ function onDataLoad(data) {
 
           //generate navigation buttons
 
-          let nav = document.createElement('nav');
-          nav.innerHTML = `<span id='home'>Home</span>`;
-          document.getElementById('container').appendChild(nav);
+          const navTop = document.createElement('nav');
+          navTop.setAttribute('id', 'home-button');
+          navTop.innerHTML = `<span id='home'>Home</span>`;
+          document.getElementById('container').appendChild(navTop);
 
           document.querySelector('#home').addEventListener('click', function() {
             reset();
             loadInitial();
           });
+          
+          const navBottom = document.createElement('nav');
+          navBottom.setAttribute('id', 'back-and-next');
+          navBottom.innerHTML = `<section><p id='back'>Back</p><p id='next'>Next</p></section>`;
+          document.getElementById('container').appendChild(navBottom);
+
+          document.querySelector('#back').addEventListener('click', back);
+          document.querySelector('#next').addEventListener('click', next);
 
           console.log(state);
           gtag('event', 'first screen', {'event_category': `question-${i}`})
@@ -128,7 +125,7 @@ function onDataLoad(data) {
       
       //slideElement.innerHTML = slide.title ? `${slide.title}` : (slide.question ? `${slide.question}` : 'PLACEHOLDER'); 
       if (slide.type == 'about') {
-        slideElement.innerHTML = `<div class='about-container'><header><h1>${slide.title}</h1><p>${slide.text}</p></header><h2>Join the Movement</h2><button>Tell Us Your Story</button></div>`
+        slideElement.innerHTML = `<div class='about-container'><header><h1>${slide.title}</h1><p>${slide.text}</p></header><h2>Join the Movement</h2><button class='tell-story'>Tell Us Your Story</button></div>`
 
       } else if (slide.question) {
         let template = `<h1>${slide.question}</h1>`; 
@@ -144,21 +141,18 @@ function onDataLoad(data) {
             input = `<input placeholder='ENTER YOUR RESPONSE'/>`
 
         }
-        //switch (slide.type) {
-        //  case 'select': 
-        //    input = `<select></select>`; 
-        //  case 'datepicker': 
-        //    input = `<input type="date" value="YYYY-MM-DD"/>`
-        //  default: 
-        //    input = '<input />'
-        //}
+       
         slideElement.innerHTML = `<div class='question-container'>${template}${input}</div>`; 
       } else {
         slideElement.innerHTML = `<div><h1>${slide.title}</h1><p>${slide.text}</p></div>`
       }
       
       parentEle.appendChild(slideElement);
+      
+
     });
+    
+    document.querySelector('.tell-story').addEventListener('click', next);
 
   }
 
@@ -183,13 +177,14 @@ function onDataLoad(data) {
 
   }
 
-  //update();
-
   function shiftSlides(direction) {
     if (direction == 'back') {
       let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress + 1}`);
       let prevSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress}`);
-
+      
+      if (state.q_progress == 1) {
+        document.querySelector('#back-and-next').style.display = 'none';
+      }
       currentSlide.classList.remove('center');
       currentSlide.classList.add('right');
 
@@ -198,7 +193,11 @@ function onDataLoad(data) {
     } else if (direction == 'next') {
       let currentSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress - 1}`);
       let nextSlide = document.querySelector(`#slide${state.q_id}-${state.q_progress}`);
-
+      
+      if (state.q_progress == 2) {
+        document.querySelector('#back-and-next').style.display = 'block';
+      }
+      
       currentSlide.classList.remove('center');
       currentSlide.classList.add('left');
 
@@ -242,32 +241,33 @@ function onDataLoad(data) {
 
   });
 
+  
+  function back() {
+    
+    if (state.q_id != null) {
+      state.q_progress > 0 ? state.q_progress-- : 0;
+    }
+    console.log(state);
+    shiftSlides('back');
 
-  //document.querySelector('#back').addEventListener('click', function(e) {
-  //  if (state.q_id != null) {
-  //    state.q_progress > 0 ? state.q_progress-- : 0;
-  //  }
-  //  console.log(state);
-  //  shiftSlides('back');
-//
-  //});
-//
-  //document.querySelector('#next').addEventListener('click', function(e) {
-  //  if (state.q_id != null) {
-  //    state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
-  //  }
-  //  console.log(state);
-  //  gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
-  //  shiftSlides('next');
-//
-//
-  //});
+  }
+   
+  function next() {
+    if (state.q_id != null) {
+      state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+    }
+    console.log(state);
+    gtag('event', `screen-number-${state.q_progress}`, {'event_category': `question-${state.q_id}`});
+    shiftSlides('next');
+  }
 
 
 
   function reset() {
     document.querySelector('#container').querySelectorAll('.slide').forEach(slide => document.querySelector('#container').removeChild(slide));
-    document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('nav'));
+    document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('#home-button'));
+    document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('#back-and-next'));
+
     state = {
       q_id: null,
       q_progress: null,

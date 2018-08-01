@@ -114,7 +114,7 @@ div#centerCircle p.small_blue {
     transition-duration: 1.5s;
 }
 
-nav {
+nav#home-button {
   height: 10%;
   position: absolute;
   top: 0; 
@@ -124,11 +124,30 @@ nav {
     
 }
 
-nav #home {
+nav#home-button #home {
   font-weight: 300;
   padding-bottom: 5px;
   border-bottom: 2px solid #75BBC8;
 
+}
+
+nav#back-and-next {
+  height: 10%;
+  position: absolute;
+  bottom: 0; 
+  width: 100%; 
+  color: #75BBC8;
+  display: none;
+}
+
+nav#back-and-next section {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  position: relative; 
+  display: flex;
+  justify-content: space-between;
+  
 }
 
 .bottom {
