@@ -10,7 +10,9 @@
 
 ## Updating data
 
-The data is stored in google sheet (https://docs.google.com/spreadsheets/d/1V-INXvFo918hYdcVTZGTVkLdo9QDCHsc3A9Gx8mgH00/edit#gid=0).
+The data is stored in google sheet (https://docs.google.com/spreadsheets/d/1V-INXvFo918hYdcVTZGTVkLdo9QDCHsc3A9Gx8mgH00/edit#gid=0). You'll need google credentials stored in 'scripts/service-account.json'. Credentials are gitignored
+so ask Zdenek (zdenek.hynek@gmail.com) if you need them.
+
 
 Install dependencies by:
 
