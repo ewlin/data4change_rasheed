@@ -175,14 +175,17 @@ document.querySelector('#container').addEventListener('touchend', function(e) {
         console.log(e.changedTouches[0]['clientX']);
         touchendPoint = e.changedTouches[0]['clientX'];
 
-        if (touchendPoint > touchstartPoint) {
-            state.q_progress > 0 ? state.q_progress-- : 0;
-            shiftSlides('back');
-        } else {
-            state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
-            shiftSlides('next');
+        if (Math.abs(touchendPoint-touchstartPoint) > 15) {
+            if (touchendPoint > touchstartPoint) {
+                state.q_progress > 0 ? state.q_progress-- : 0;
+                shiftSlides('back');
+            } else {
+                state.q_progress < currentQContent.length - 1 ? state.q_progress++ : currentQContent.length - 1;
+                shiftSlides('next');
+            }
+            console.log(state);
         }
-        console.log(state);
+
 
         //update('left');
     }
