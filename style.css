@@ -60,6 +60,7 @@ body, html {
 #container ul li p {
     top: 50%;
     font-weight: 300;
+    font-size: 1.2em;
 }
 
 #container ul li .q-img {
