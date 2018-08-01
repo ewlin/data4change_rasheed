@@ -11,7 +11,7 @@ module.exports.SHEETS = [
   { index: 1, type: 'array', name: 'questions', cols: ['text', 'icon', 'color', 'type', 'placeholder'] },
   { index: 2, type: 'array', name: 'data-vizes', cols: ['title', 'text', 'image'] },
   { index: 3, type: 'object', name: 'about', cols: ['title', 'text', 'subtitle',  'CTA', 'image'] },
-  { index: 4, type: 'array', name: 'form', cols: ['question', 'type', 'is required', 'data'] },
+  { index: 4, type: 'array', name: 'form', cols: ['question', 'placeholder', 'type', 'isrequired', 'data'] },
 ];
 
 /*

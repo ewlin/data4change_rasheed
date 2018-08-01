@@ -8,35 +8,40 @@
             "icon": "bribary",
             "color": "#ff000",
             "type": "question",
-            "placeholder": ""
+            "placeholder": "",
+            "id": "questions-0"
         },
         {
             "text": "Have you ever been nudged to to vote for somebody?",
             "icon": "voting",
             "color": "#00ff00",
             "type": "question",
-            "placeholder": ""
+            "placeholder": "",
+            "id": "questions-1"
         },
         {
             "text": "Have you experienced wasta?",
             "icon": "waste",
             "color": "#0000ff",
             "type": "question",
-            "placeholder": ""
+            "placeholder": "",
+            "id": "questions-2"
         },
         {
             "text": "Any other incident you can think of?",
             "icon": "",
             "color": "#0f00ff",
             "type": "custom",
-            "placeholder": "Give an example"
+            "placeholder": "Give an example",
+            "id": "questions-3"
         }
     ],
     "data-vizes": [
         {
             "title": "Data viz title 1",
             "text": "Data viz text 1",
-            "image": "Data viz graphics 1"
+            "image": "image path",
+            "id": "data-vizes-0"
         }
     ],
     "about": {
@@ -48,38 +53,78 @@
     "form": [
         {
             "question": "Where did this incident take place?",
+            "placeholder": "select",
             "type": "select",
-            "data": "<list of governents>"
+            "isrequired": "yes",
+            "data": [
+                "Irbid",
+                "Ajloun",
+                "Jerash",
+                "Mafraq",
+                "Balqa",
+                "Amman",
+                "Zarqa",
+                "Madaba",
+                "Karak",
+                "Tafilah",
+                "Ma'an",
+                "Aqaba"
+            ],
+            "id": "form-0"
         },
         {
             "question": "Why did it happen?",
+            "placeholder": "Describe why..",
             "type": "textarea",
-            "data": ""
+            "isrequired": "yes",
+            "data": "",
+            "id": "form-1"
         },
         {
             "question": "Do you remember the date and time?",
+            "placeholder": "date and time",
             "type": "datepicker",
-            "data": ""
+            "isrequired": "yes",
+            "data": "",
+            "id": "form-2"
         },
         {
             "question": "Do you have evidence?",
+            "placeholder": "",
             "type": "radiogroup",
-            "data": "yes, no"
+            "isrequired": "yes",
+            "data": [
+                "yes",
+                "no"
+            ],
+            "id": "form-3"
         },
         {
             "question": "Can you name the institution?",
+            "placeholder": "Name of institution",
             "type": "input",
-            "data": ""
+            "isrequired": "no",
+            "data": "",
+            "id": "form-4"
         },
         {
             "question": "Would you like to tell us more details about the incident?",
+            "placeholder": "Describe incident...",
             "type": "textarea",
-            "data": ""
+            "isrequired": "no",
+            "data": "",
+            "id": "form-5"
         },
         {
             "question": "Would you like to give us more information about yourself?",
+            "placeholder": [
+                "Full name",
+                "Email"
+            ],
             "type": "contact",
-            "data": ""
+            "isrequired": "no",
+            "data": "",
+            "id": "form-6"
         }
     ]
 }

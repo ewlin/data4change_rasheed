@@ -10,9 +10,20 @@ function writeJson(file, data) {
   fs.writeFileSync(file, jsonData);
 }
 
+function splitIntoArray(string) {
+  return string.split(';');
+}
+
 function createRowObject(data, columns, name, index) {
   const obj = columns.reduce((acc, col) => {
-    acc[col] = data[col];
+    let value = data[col];
+
+    //  deal with array files
+    if (value && value.indexOf(';') > -1) {
+      value =  splitIntoArray(value);
+    }
+
+    acc[col] = value;
     return acc;
   }, {});
 
