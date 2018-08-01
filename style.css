@@ -47,17 +47,20 @@ nav {
 .center {
     transform: translate(0,0);
     transition-property: transform;
-    transition-duration: 1.5s;
+    transition-duration: 1.2s;
+    transition-timing-function: easeInOutQuad;
 }
 
 .right {
     transform: translate(100%,0);
     transition-property: transform;
-    transition-duration: 1.5s;
+    transition-duration: 1.2s;
+    transition-timing-function: easeInOutQuad;
 }
 
 .left {
     transform: translate(-100%,0);
     transition-property: transform;
-    transition-duration: 1.5s;
+    transition-duration: 1.2s;
+    transition-timing-function: easeInOutQuad;
 }
