@@ -20,17 +20,24 @@ function createRowObject(data, columns) {
 /*
   Fetch sheet data and format it
  */
-function getSheetData(sheet, name, columns) {
+function getSheetData(sheet, type, columns) {
   return new Promise((resolve, reject) => {
     sheet.getRows({ offset: 1 }, function(err, rows) {
       if (err) {
         reject(err);
       }
 
-      const data = rows.reduce((acc, row) => {
-        acc[name] = createRowObject(row, columns);
-        return acc;
-      }, {});
+      let data = {};
+      if (type === 'array') {
+        data = rows.map((row) => {
+          return createRowObject(row, columns);
+        });
+      } else if (type === 'object') {
+        if (rows.length) {
+          data = createRowObject(rows[0], columns);
+        }
+      }
+
       resolve(data);
     });
   });
@@ -59,14 +66,27 @@ async function updateData() {
 
   //  create all promises to fetch data from all the sheets
   const promises = SHEETS.map((SHEET) => {
-    const { index, name, cols } = SHEET;
-    return getSheetData(sheetData.worksheets[index], name, cols);
+    const { index, type, cols } = SHEET;
+    return getSheetData(sheetData.worksheets[index], type, cols);
   });
 
   Promise.all(promises)
+    .then((data) => {
+      //  map data to final format
+      console.log('reduce');
+      const formattedData = SHEETS.reduce((acc, SHEET, i) => {
+        acc[SHEET.name] = data[i];
+        return acc;
+      }, {});
+
+      console.log('formattedData');
+      console.log(formattedData);
+
+      return Promise.resolve(formattedData);
+    })
     .then((arr) => {
       writeJson(DATA_PATH, arr);
     });
 }
 
-updateData();
+updateData().catch(console.log);
