@@ -53,6 +53,7 @@ function onDataLoad(data) {
 
         //document.getElementByID('question-container').
         let containerListItem = document.createElement('li');
+        containerListItem.setAttribute('id', 'q-' + i)
         containerListItem.innerHTML =
           questionImages[i].image
           ? `<div class='q-wrapper'><img class='q-img' src=${questionImages[i].image} /><p>${e.text}</p></div>`
@@ -107,7 +108,7 @@ function onDataLoad(data) {
       //circle text
       const circleText = document.createElement('div');
       circleText.setAttribute('id', 'centerCircle');
-      circleText.innerHTML = "<div><p>Have you experienced corruption?</p><p class='small_blue'>Select one</p></div>"
+      circleText.innerHTML = "<div><p>Have you ever...</p></div>"
       document.querySelector('#container').appendChild(circleText);
     }
 

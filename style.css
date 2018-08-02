@@ -23,7 +23,7 @@ body, html {
 #container {
     margin: auto;
     text-align: center;
-    max-width: 500px;
+    /*m*ax-width: 500px;*/
     height: 100%;
     /*transform: translate(-500px,0);*/
 }
@@ -39,6 +39,30 @@ body, html {
 
 }
 
+li#q-2 {
+  background-image: url(assets/background/wasta-background.svg);
+  background-color: rgba(2,151,255,.09);
+}
+
+li#q-3 {
+  background-image: url(assets/background/other-background.svg);
+  background-color: rgba(0,109,182,.11);
+}
+
+li#q-0 {
+  background-image: url(assets/background/bribe-background.svg);
+  background-size: cover;
+  background-color: rgba(3,136,220,.11);
+}
+
+
+li#q-1 {
+  background-image: url(assets/background/voting-background.svg);
+  background-color: rgba(22,140,222,.06);
+}
+
+
+
 #container ul li {
     width: 50%;
     text-decoration: none;
@@ -46,7 +70,7 @@ body, html {
     position: relative;
     text-align: center;
     box-sizing: border-box;
-    border: 1px solid grey;
+    border: 1.5px solid white;
 
 }
 
@@ -82,8 +106,8 @@ div#centerCircle {
     bottom: 50%;
     left: 30%;
     right: 30%;
-    border: 1px solid grey;
-    background: #dde5ea;
+    border: 1.5px solid white;
+    background: #ffffff;
 }
 
 div#centerCircle div {

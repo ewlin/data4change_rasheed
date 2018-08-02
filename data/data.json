@@ -4,7 +4,7 @@
     },
     "questions": [
         {
-            "text": "Have you had to \rbribe someone for \ra service?",
+            "text": "Had to pay under the table for a service?",
             "icon": "bribary",
             "color": "#ff000",
             "type": "question",
@@ -12,7 +12,7 @@
             "id": "questions-0"
         },
         {
-            "text": "Have you ever been nudged to to vote for somebody?",
+            "text": "Been paid to vote for somebody?",
             "icon": "voting",
             "color": "#00ff00",
             "type": "question",
@@ -20,7 +20,7 @@
             "id": "questions-1"
         },
         {
-            "text": "Have you experienced wasta?",
+            "text": "Had to resort to 'Wasta'?",
             "icon": "waste",
             "color": "#0000ff",
             "type": "question",
@@ -28,7 +28,7 @@
             "id": "questions-2"
         },
         {
-            "text": "Any other incident you can think of?",
+            "text": "Experienced another incident?",
             "icon": "",
             "color": "#0f00ff",
             "type": "custom",
