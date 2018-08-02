@@ -40,7 +40,7 @@ function onDataLoad(data) {
 
   const dataViz = [
     {image: 'assets/bribe-data.png'}, 
-    {image: 'assets/bribe-data.png'}, 
+    {image: 'assets/voting-data.png'}, 
     {image: 'assets/wasta-data.png'}, 
     {image: 'assets/other-data.png'}, 
   ]
