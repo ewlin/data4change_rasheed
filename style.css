@@ -224,6 +224,7 @@ div.dark-theme {
   border-radius: 30px;
   margin: auto;
   margin-left: 25%;
+  border: none;
 }
 
 input, select, textarea {
