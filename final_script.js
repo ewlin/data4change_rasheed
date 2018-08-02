@@ -38,6 +38,12 @@ function onDataLoad(data) {
     {id: 3, slide_text: "Other", input: true, input_type: 'textbox'}
   ];
 
+  const dataViz = [
+    {image: 'assets/bribe-data.png'}, 
+    {image: 'assets/bribe-data.png'}, 
+    {image: 'assets/wasta-data.png'}, 
+    {image: 'assets/other-data.png'}, 
+  ]
 
   function loadInitial() {
     if (!document.querySelector('ul')) {
@@ -108,7 +114,7 @@ function onDataLoad(data) {
   function generateSlides() {
     const parentEle = document.querySelector('#container');
     //currentQContent = [dataVizPage[state.q_id], ...sharedContent]
-    currentQContent = [data['data-vizes'][state.q_id] ? data['data-vizes'][state.q_id] : {}, Object.assign({type: 'about'}, data['about']), ...data['form']]
+    currentQContent = [dataViz[state.q_id], Object.assign({type: 'about'}, data['about']), ...data['form']]
     console.log(currentQContent)
     
     currentQContent.forEach((slide, i) => {
@@ -151,7 +157,7 @@ function onDataLoad(data) {
        
         slideElement.innerHTML = `<div class='question-container'>${template}${input}</div>`; 
       } else {
-        slideElement.innerHTML = `<div><h1>${slide.title}</h1><p>${slide.text}</p></div>`
+        slideElement.innerHTML = `<div class='image-container'><img class='data-viz' src=${slide.image} /></div><nav class='cta'><p>Find out how you can help</p><img src='assets/arrow-right.svg' /></nav>`
       }
       
       parentEle.appendChild(slideElement);
@@ -160,6 +166,8 @@ function onDataLoad(data) {
     });
     
     document.querySelector('.tell-story').addEventListener('click', next);
+    document.querySelector('.cta').addEventListener('click', next);
+
 
   }
 

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="235" height="319" viewBox="0 0 235 319">
+    <g fill="none" fill-rule="evenodd">
+        <text fill="#000" font-family="SourceSansPro-Light, Source Sans Pro" font-size="29" font-weight="300" transform="translate(-4 -8)">
+            <tspan x="3.057" y="29">Jordan has dropped</tspan>
+        </text>
+        <text fill="#000" font-family="SourceSansPro-Black, Source Sans Pro" font-size="88" font-weight="700" transform="translate(-4 -8)">
+            <tspan x="19" y="203">14</tspan> <tspan x="115.36" y="203.88" font-family="SourceSansPro-Bold, Source Sans Pro" font-weight="bold"> </tspan> <tspan x="35.071" y="289.592" font-family="SourceSansPro-Light, Source Sans Pro" font-size="33" font-weight="300">places</tspan>
+        </text>
+        <g fill="#04ADE6" fill-rule="nonzero">
+            <path d="M221 156.255V112l-40.005 29.735L141 112v44.255L180.995 186z"/>
+            <path d="M221 99.275V82l-40.005 29.725L141 82v17.275L180.995 129z"/>
+        </g>
+        <text fill="#000" font-family="SourceSansPro-Regular, Source Sans Pro" font-size="16" transform="translate(-4 -8)">
+            <tspan x="9.512" y="240">On Global Corruption Perceptions </tspan> <tspan x="23.432" y="260">Index between 2015 and 2017</tspan>
+        </text>
+        <text fill="#000" font-family="SourceSansPro-LightIt, Source Sans Pro" font-size="11" font-style="italic" font-weight="300" transform="translate(-4 -8)">
+            <tspan x="10.273" y="310">Source: Global Corruption Perception Index Reports, </tspan> <tspan x="63.266" y="324">Transparency International</tspan>
+        </text>
+    </g>
+</svg>

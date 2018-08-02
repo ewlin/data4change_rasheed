@@ -104,7 +104,7 @@ div#centerCircle p {
 div#centerCircle p.small_blue {
     padding-top: 2vw;
     font-size: .8em;
-    color: #46bdf9;
+    color: #04ade6;
 }
 
 
@@ -174,6 +174,15 @@ nav#back-and-next section div {
   transform: translateY(-50%);
 }
 
+.slide div.image-container {
+  position: relative;
+  
+}
+
+.slide div.image-container img {
+  width: 100%;
+}
+
 div.dark-theme {
   background: #006db6; 
   color: #ffffff; 
@@ -226,6 +235,35 @@ div.dark-theme {
   margin-left: 25%;
   border: none;
 }
+
+.slide nav.cta {
+  height: 10%;
+  position: absolute;
+  bottom: 0; 
+  width: 100%; 
+}
+
+.slide nav.cta p {
+  display: inline-block;
+  margin: 0;
+  font-weight: 300;
+}
+
+.slide nav.cta img {
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+/**
+nav#back-and-next {
+  height: 10%;
+  position: absolute;
+  bottom: 0; 
+  width: 100%; 
+  color: #75BBC8;
+  display: none;
+}
+**/
 
 input, select, textarea {
   font-family: 'Source Sans Pro';
