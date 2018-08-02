@@ -80,6 +80,12 @@ function onDataLoad(data) {
             loadInitial();
           });
           
+          const logo = document.createElement('header');
+          logo.setAttribute('id', 'logo-container');
+          logo.innerHTML = "<img src='assets/rasheed.png' />";
+          document.getElementById('container').appendChild(logo);
+
+          
           const navBottom = document.createElement('nav');
           navBottom.setAttribute('id', 'back-and-next');
           //navBottom.innerHTML = `<section><p id='back'>Back</p><p id='next'>Next</p></section>`;
@@ -201,11 +207,13 @@ function onDataLoad(data) {
         document.querySelector('#back-and-next').style.display = 'none';
         document.querySelector('#home-button').style.color = '#ffffff';
         document.querySelector('#home-button #home').style.borderBottom = '2px solid #ffffff';
+        document.querySelector('#logo-container img').setAttribute('src', 'assets/rasheed_w.png');
+
 
       } else {
         document.querySelector('#home-button').style.color = '#0081ff';
         document.querySelector('#home-button #home').style.borderBottom = '2px solid #0081ff';
-
+        document.querySelector('#logo-container img').setAttribute('src', 'assets/rasheed.png');
       }
       currentSlide.classList.remove('center');
       currentSlide.classList.add('right');
@@ -223,10 +231,12 @@ function onDataLoad(data) {
       if (state.q_progress == 1) {
         document.querySelector('#home-button').style.color = '#ffffff';
         document.querySelector('#home-button #home').style.borderBottom = '2px solid #ffffff';
+        document.querySelector('#logo-container img').setAttribute('src', 'assets/rasheed_w.png');
 
       } else {
         document.querySelector('#home-button').style.color = '#0081ff';
         document.querySelector('#home-button #home').style.borderBottom = '2px solid #0081ff';
+        document.querySelector('#logo-container img').setAttribute('src', 'assets/rasheed.png');
       }
       
       currentSlide.classList.remove('center');
