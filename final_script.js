@@ -70,6 +70,12 @@ function onDataLoad(data) {
 
           //generate navigation buttons
 
+        
+          const logo = document.createElement('header');
+          logo.setAttribute('id', 'logo-container');
+          logo.innerHTML = "<img src='assets/rasheed.png' />";
+          document.getElementById('container').appendChild(logo);
+
           const navTop = document.createElement('nav');
           navTop.setAttribute('id', 'home-button');
           navTop.innerHTML = `<span id='home'>Home</span>`;
@@ -80,11 +86,6 @@ function onDataLoad(data) {
             loadInitial();
           });
           
-          const logo = document.createElement('header');
-          logo.setAttribute('id', 'logo-container');
-          logo.innerHTML = "<img src='assets/rasheed.png' />";
-          document.getElementById('container').appendChild(logo);
-
           
           const navBottom = document.createElement('nav');
           navBottom.setAttribute('id', 'back-and-next');
@@ -308,6 +309,8 @@ function onDataLoad(data) {
     document.querySelector('#container').querySelectorAll('.slide').forEach(slide => document.querySelector('#container').removeChild(slide));
     document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('#home-button'));
     document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('#back-and-next'));
+    document.querySelector('#container').removeChild(document.querySelector('#container').querySelector('#logo-container'));
+
 
     state = {
       q_id: null,
