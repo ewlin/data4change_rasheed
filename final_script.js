@@ -76,7 +76,9 @@ function onDataLoad(data) {
           
           const navBottom = document.createElement('nav');
           navBottom.setAttribute('id', 'back-and-next');
-          navBottom.innerHTML = `<section><p id='back'>Back</p><p id='next'>Next</p></section>`;
+          //navBottom.innerHTML = `<section><p id='back'>Back</p><p id='next'>Next</p></section>`;
+          navBottom.innerHTML = `<section><div><img id='back' src='assets/arrow-left.svg' /></div><div><img id='next' src='assets/arrow-right.svg' /></div></section>`;
+
           document.getElementById('container').appendChild(navBottom);
 
           document.querySelector('#back').addEventListener('click', back);
@@ -125,21 +127,26 @@ function onDataLoad(data) {
       
       //slideElement.innerHTML = slide.title ? `${slide.title}` : (slide.question ? `${slide.question}` : 'PLACEHOLDER'); 
       if (slide.type == 'about') {
-        slideElement.innerHTML = `<div class='about-container'><header><h1>${slide.title}</h1><p>${slide.text}</p></header><h2>Join the Movement</h2><button class='tell-story'>Tell Us Your Story</button></div>`
+        slideElement.classList.add('dark-theme'); 
+        
+        slideElement.innerHTML = `<div class='about-container'><header><h1>${slide.title}</h1><p>${slide.text}</p></header><h2>${slide.subtitle}</h2><button class='tell-story'>Tell Us Your Story</button></div>`
 
       } else if (slide.question) {
         let template = `<h1>${slide.question}</h1>`; 
         let input; 
         
         if (slide.type == 'select') {
-          input = `<select><option>Select</option><option>Yes</option><option>NO</option></select>`; 
+          const options = slide.data.reduce((html, option) => html + `<option value=${option}>${option}</option>`, '')
+          input = `<select><option>Select governorate</option>${options}</select>`; 
 
         } else if (slide.type == 'datepicker') {
-            input = `<input type="date" value="YYYY-MM-DD" />`
+          input = `<input type="date" value="YYYY-MM-DD" />`
+        } else if (slide.type == 'textarea') {
+          
+          input = `<textarea ${slide.isrequired === 'yes' ? 'required' : ''} placeholder='${slide.placeholder}'></textarea>`;
 
         } else {
-            input = `<input placeholder='ENTER YOUR RESPONSE'/>`
-
+          input = `<input placeholder='ENTER YOUR RESPONSE'/>`
         }
        
         slideElement.innerHTML = `<div class='question-container'>${template}${input}</div>`; 
@@ -184,6 +191,13 @@ function onDataLoad(data) {
       
       if (state.q_progress == 1) {
         document.querySelector('#back-and-next').style.display = 'none';
+        document.querySelector('#home-button').style.color = '#ffffff';
+        document.querySelector('#home-button #home').style.borderBottom = '2px solid #ffffff';
+
+      } else {
+        document.querySelector('#home-button').style.color = '#0081ff';
+        document.querySelector('#home-button #home').style.borderBottom = '2px solid #0081ff';
+
       }
       currentSlide.classList.remove('center');
       currentSlide.classList.add('right');
@@ -196,6 +210,15 @@ function onDataLoad(data) {
       
       if (state.q_progress == 2) {
         document.querySelector('#back-and-next').style.display = 'block';
+      }
+      
+      if (state.q_progress == 1) {
+        document.querySelector('#home-button').style.color = '#ffffff';
+        document.querySelector('#home-button #home').style.borderBottom = '2px solid #ffffff';
+
+      } else {
+        document.querySelector('#home-button').style.color = '#0081ff';
+        document.querySelector('#home-button #home').style.borderBottom = '2px solid #0081ff';
       }
       
       currentSlide.classList.remove('center');

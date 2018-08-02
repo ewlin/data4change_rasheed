@@ -119,16 +119,15 @@ nav#home-button {
   position: absolute;
   top: 0; 
   padding-top: 25px;
-  padding-left: 20px;
-  color: #75BBC8;
+  padding-left: 29px;
+  color: #0081ff;
     
 }
 
 nav#home-button #home {
   font-weight: 300;
   padding-bottom: 5px;
-  border-bottom: 2px solid #75BBC8;
-
+  border-bottom: 2px solid #0081ff;
 }
 
 nav#back-and-next {
@@ -141,14 +140,21 @@ nav#back-and-next {
 }
 
 nav#back-and-next section {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 29px;
+  padding-right: 29px;
   padding-bottom: 30px;
   position: relative; 
   display: flex;
   justify-content: space-between;
   
 }
+
+nav#back-and-next section div {
+
+}
+
+
+
 
 .bottom {
   top: 200; 
@@ -168,10 +174,63 @@ nav#back-and-next section {
   transform: translateY(-50%);
 }
 
-input, select {
+div.dark-theme {
+  background: #006db6; 
+  color: #ffffff; 
+}
+
+.slide div.about-container {
+  transform: none;
+  width: auto; 
+  top: auto;
+  margin-top: 108px;
+  padding-left: 29px;
+  padding-right: 29px;
+  text-align: left;
+}
+
+.slide div.about-container h1 {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: 600;
+  border-bottom: 3px solid #ffffff;
+  margin: 0 0; 
+  padding-bottom: 7px;
+}
+
+.slide div.about-container p {
+  text-align: justify;
+  font-weight: 300;
+}
+
+.slide div.about-container header {
+  padding-bottom: 20%;
+}
+
+.slide div.about-container h2 {
+  text-align: center;
+  font-weight: 300;
+  
+}
+
+.slide div.about-container button {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: #006db6; 
+  background: #ffffff;
+  width: 50%;
+  height: 48px;
+  border-radius: 30px;
+  margin: auto;
+  margin-left: 25%;
+}
+
+input, select, textarea {
+  font-family: 'Source Sans Pro';
   border: 1px solid grey; 
-  width: 65%; 
-  border-radius: 2px;
+  width: 100%; 
+  border-radius: 3px;
   padding: 11px 5px;
 }
 
